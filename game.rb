@@ -22,7 +22,7 @@ class Game
 
   def game_update
     @players.each do  |player|
-      player.print_statusexi
+      player.print_status
     end
   end
 

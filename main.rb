@@ -1,7 +1,5 @@
 require './game'
 
-
-
 players = 0
 
 while players < 2
