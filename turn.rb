@@ -1,23 +1,26 @@
-# require './question' Do we need it this divided up?
+require './question' 
 
 class Turn
   # State: 
   # Behavior: Asks question and evaluates answer from player
+
   def initialize
-    @number1 = rand(1..20)
-    @number2 = rand(1..20)
-    @answer = @number1 + @number2
+    @question = Question.new
   end
 
   def run_turn(player)
-    print "#{player.name}, what is #{@number1} + #{@number2}? "
-    response = gets.chomp.to_i
 
-    if response == @answer
-      player.score += 1
+    print "#{player.name}, "
+    @question.print_question
+
+    response = gets.chomp.to_i
+    result = @question.guess?(response)
+
+    if result
+      player.increase_score
       puts "Good job #{player.name}. That's correct."
     else
-      player.lives -= 1
+      player.decrease_lives
       puts "Sorry #{player.name}. That is not correct."
     end
   end

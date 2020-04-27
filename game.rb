@@ -22,7 +22,7 @@ class Game
 
   def game_update
     @players.each do  |player|
-      puts "#{player.name} has a score of #{player.score} with #{player.lives} lives left."
+      player.print_statusexi
     end
   end
 
@@ -40,7 +40,11 @@ class Game
 
     loser = @players.select { |player| player.lives <= 0}
     loser = loser.pop
-    puts "\n#{loser.name} ended the game when they ran out of lives with a score of #{loser.score}."
+    if loser 
+      puts "\n#{loser.name} ended the game when they ran out of lives with a score of #{loser.score}."
+    else
+      puts "No one is out of lives yet."
+    end
   end
 
   def run_game
@@ -51,7 +55,7 @@ class Game
       puts "\n----- New Turn -----"
       turn.run_turn(player)
       
-      if player.lives <= 0
+      if !player.alive
         @game_running = false
         puts "\n----- Game over -----"
       else
